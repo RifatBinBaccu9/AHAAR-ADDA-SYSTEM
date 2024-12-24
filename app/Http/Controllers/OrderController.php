@@ -45,5 +45,32 @@ public function orderList(){
     'orderDataStor'=>$orderDataStor, 
     'user'=>$user]);
    }
+public function userorderList(){
+    $user=Auth::user();
+    $navbar=Navbar::get();
+  $userorderList=Order::get();
+  return view('user-site.pages.userorderList', [
+    'NavbarView'=>$navbar,
+    'userorderList'=>$userorderList, 
+    'user'=>$user]);
+   }
+
+   // admin status accepted 
+ public function orderAccept($id)
+ {
+     $post = Order::findOrFail($id);
+     $post->status = 'accepted';
+     $post->save();
+
+     return redirect()->back();
+ }
+ public function orderReject($id)
+ {
+     $post = Order::findOrFail($id);
+     $post->status = 'rejected';
+     $post->save();
+
+     return redirect()->back();
+ }
     
 }

@@ -1,13 +1,13 @@
-@extends('admin-site')
-@section('admin-site')
+@extends('user-site')
+@section('user-site')
 <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Order Data List</h1>
+      <h1>Booking Data List</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-          <li class="breadcrumb-item active">Order Data List</li>
+          <li class="breadcrumb-item active">Booking Data List</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -31,7 +31,7 @@
                 </tr>
             </thead>
               <tbody>
-                @foreach ($orderDataStor as $item)
+                @foreach ($userorderList as $item)
                 <tr>
                     <td>{{$item->foodName}}</td>
                     <td>{{$item->foodPrice}}</td>
@@ -50,28 +50,6 @@
                       @endif
 
                     </td>
-                     <td>
-                      @if ($item->status === 'rejected')
-                        <form action="{{ route('order.accept', $item->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            <button type="submit" class="btn btn-success btn-sm">Accept</button>
-                        </form>
-                        @elseif ($item->status === 'accepted')
-                        <form action="{{ route('order.reject', $item->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            <button type="submit" class="btn btn-danger btn-sm">Reject</button>
-                        </form>
-                      @else
-                      <form action="{{ route('order.accept', $item->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        <button type="submit"  class="btn btn-success btn-sm">Accept</button>
-                    </form>
-                    <form action="{{ route('order.reject', $item->id) }}" method="POST" style="display:inline;">
-                      @csrf
-                      <button type="submit" class="btn btn-danger btn-sm">Reject</button>
-                  </form> 
-                        @endif
-                    </td> 
                 </tr>
 
                 @endforeach

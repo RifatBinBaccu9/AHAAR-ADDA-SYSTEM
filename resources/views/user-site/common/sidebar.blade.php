@@ -8,6 +8,13 @@
           <span>Profile</span>
         </a>
       </li><!-- End Dashboard Nav -->
+      <li class="nav-heading">Order List</li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{url('/user/userorderList')}}">
+          <i class="bi bi-layout-text-window-reverse"></i><span>Order Data</span>
+        </a>
+      </li><!-- End Tables Nav -->
+      </li><!-- End Dashboard Nav -->
       <li class="nav-heading">Booking List</li>
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{url('/user/bookingList')}}">

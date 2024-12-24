@@ -226,4 +226,8 @@ Route::get('/SentMail', [MailController::class, 'sentMail'])->name('mails');
 
 Route::get('/order/{id}', [OrderController::class, 'showOrderPage'])->name('order.page');
 Route::post('/order/place', [OrderController::class, 'placeOrder'])->name('place.order');
+
 Route::get('/admin/order/place', [OrderController::class, 'orderList']);
+Route::post('/admin/order/accept/{id}', [OrderController::class, 'orderAccept'])->name('order.accept');
+Route::post('/admin/order/reject/{id}', [OrderController::class, 'orderReject'])->name('order.reject');
+Route::get('/user/userorderList', [OrderController::class, 'userorderList']);
