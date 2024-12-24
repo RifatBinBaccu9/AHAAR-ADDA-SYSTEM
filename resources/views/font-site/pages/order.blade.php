@@ -10,10 +10,20 @@
                     <div class="card shadow-sm mb-4" style="max-width: 20rem; border-radius: 8px; overflow: hidden;">
                         <img src="{{ asset($foodItem->foodPicture) }}" class="card-img-top" alt="{{ $foodItem->foodName }}" style="height: 200px; object-fit: cover; padding:15px;">
                         <div class="card-body">
-                            <h5 class="card-title text-center" style="font-weight: bold;">{{ $foodItem->foodName }}</h5>
-                            <p class="card-text text-center">Price: <strong class="text-success">{{ $foodItem->foodPrice }}</strong></p>
                             <form action="{{ route('place.order') }}" method="POST">
                                 @csrf
+                                <div class="form-group">
+                                    <label for="foodName">Food Name</label>
+                                    <input type="text" class="form-control" id="foodName" name="foodName" value="{{ $foodItem->foodName }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="foodPrice">Food Price</label>
+                                    <input type="text" class="form-control" id="foodPrice" name="foodPrice" value="{{ $foodItem->foodPrice }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input type="text" class="form-control" id="address" name="address" required>
+                                </div>
                                 <input type="hidden" name="food_id" value="{{ $foodItem->id }}">
                     
                                 <!-- Payment Method -->
@@ -28,7 +38,11 @@
                                 <div id="paymentDetails"></div>
                                 
                                 <!-- Submit Button -->
+                                @if (Auth::user())
                                 <button type="submit" class="btn btn-primary w-100 mt-3">Please Order</button>
+                                @else
+                                <a href="{{route('login')}}" type="submit" class="btn btn-primary w-100 mt-3">Please Order</a>
+                                @endif
                                 <a href="{{url('/')}}" class="btn btn-danger w-100 mt-3">Cancel</a>
                             </form>
                         </div>
@@ -49,17 +63,17 @@
                     paymentDetails.innerHTML = `
                        <h6>${this.value.charAt(0).toUpperCase() + this.value.slice(1)} Account: 01768692251</h6>
                         <label for="mobileNumber" class="form-label">${this.value.charAt(0).toUpperCase() + this.value.slice(1)} Number</label>
-                        <input type="text" id="mobileNumber" name="${this.value}_number" class="form-control" placeholder="Enter your ${this.value} number" required>
+                        <input type="text" id="mobileNumber" name="number" class="form-control" placeholder="Enter your ${this.value} number" required>
                         <label for="transactionID" class="form-label">Transaction ID</label>
-                        <input type="text" id="transactionID" name="${this.value}_trx_id" class="form-control" placeholder="Enter transaction ID" required>
+                        <input type="text" id="transactionID" name="trx_id" class="form-control" placeholder="Enter transaction ID" required>
                     `;
                 } else if (this.value === 'bank') {
                     paymentDetails.innerHTML = `
                         <h6>Bank Account: 20507706700070001</h6>
                         <label for="bankAccount" class="form-label">Account Number</label>
-                        <input type="text" id="bankAccount" name="bank_account" class="form-control" placeholder="Enter your Islami Bank account number" required>
+                        <input type="text" id="bankAccount" name="number" class="form-control" placeholder="Enter your Islami Bank account number" required>
                         <label for="bankTrxID" class="form-label">Transaction ID</label>
-                        <input type="text" id="bankTrxID" name="bank_trx_id" class="form-control" placeholder="Enter transaction ID" required>
+                        <input type="text" id="bankTrxID" name="trx_id" class="form-control" placeholder="Enter transaction ID" required>
                     `;
                 }
             });

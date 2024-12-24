@@ -226,3 +226,4 @@ Route::get('/SentMail', [MailController::class, 'sentMail'])->name('mails');
 
 Route::get('/order/{id}', [OrderController::class, 'showOrderPage'])->name('order.page');
 Route::post('/order/place', [OrderController::class, 'placeOrder'])->name('place.order');
+Route::get('/admin/order/place', [OrderController::class, 'orderList']);

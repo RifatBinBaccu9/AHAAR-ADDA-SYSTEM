@@ -12,6 +12,13 @@
       
       <li class="nav-heading">Booking Data List</li>
       <li class="nav-item">
+          <a class="nav-link collapsed" href="{{ url('/admin/order/place') }}">
+            <i class="bi bi-layout-text-window-reverse"></i>
+            <span>Users Order List</span>
+        </a>
+    </li><!-- End Booking Setting Nav -->
+      <li class="nav-heading">Booking Data List</li>
+      <li class="nav-item">
           <a class="nav-link collapsed" href="{{ url('/admin/bookingList') }}">
             <i class="bi bi-layout-text-window-reverse"></i>
             <span>Users Booking List</span>

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\BreakFast;
 use App\Models\Footer;
+use App\Models\Navbar;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -22,12 +24,26 @@ class OrderController extends Controller
     // Example:
     $order=[
         'food_id' => $request->food_id,
-        'status' => 'Pending',
+        'foodName'=>$request->foodName,
+        'foodPrice'=>$request->foodPrice,
+        'payment_method'=>$request->payment_method,
+        'number'=>$request->number,
+        'trx_id'=>$request->trx_id,
+        'address'=>$request->address,
     ];
     
-   dd($order);
+   Order::create($order);
     return redirect()->back()->with('success', 'Order placed successfully!');
 }
 
+public function orderList(){
+    $user=Auth::user();
+    $navbar=Navbar::get();
+  $orderDataStor=Order::get();
+  return view('admin-site.pages.order.orderList', [
+    'NavbarView'=>$navbar,
+    'orderDataStor'=>$orderDataStor, 
+    'user'=>$user]);
+   }
     
 }
